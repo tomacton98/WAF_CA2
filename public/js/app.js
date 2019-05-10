@@ -1925,9 +1925,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var app = this;
@@ -2146,11 +2143,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       enrolment: {
-        name: '',
-        address: '',
-        email: '',
-        phone: '',
-        start: ''
+        date: '',
+        time: '',
+        status: '',
+        course_id: '',
+        student_id: ''
       },
       errors: {},
       courses: [],
@@ -2169,6 +2166,141 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (resp) {
         app.$router.go(-1);
+      })["catch"](function (resp) {
+        app.errors = resp.response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    var app = this;
+    var id = app.$router.currentRoute.params.id;
+    var token = localStorage.getItem('token');
+    axios.get('/api/enrolments/' + id, {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    }).then(function (resp) {
+      console.log(resp.data);
+      app.enrolment = resp.data;
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert('Could not load enrolment');
+    });
+    axios.get('/api/courses', {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    }).then(function (resp) {
+      console.log(resp.data);
+      app.courses = resp.data;
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert('Could not load courses');
+    });
+    axios.get('/api/students', {
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    }).then(function (resp) {
+      console.log(resp.data);
+      app.students = resp.data;
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert('Could not load students');
+    });
+  },
+  data: function data() {
+    return {
+      enrolment: {
+        date: '',
+        time: '',
+        status: '',
+        course_id: '',
+        student_id: ''
+      },
+      errors: {},
+      courses: [],
+      students: []
+    };
+  },
+  methods: {
+    updateEnrolment: function updateEnrolment() {
+      event.preventDefault();
+      var app = this;
+      var id = app.$router.currentRoute.params.id;
+      var token = localStorage.getItem('token');
+      axios.put('/api/enrolments/' + id, app.enrolment, {
+        headers: {
+          "Authorization": "Bearer " + token
+        }
+      }).then(function (resp) {
+        app.$router.push({
+          name: 'enrolments'
+        });
       })["catch"](function (resp) {
         app.errors = resp.response.data;
       });
@@ -2367,9 +2499,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -38047,24 +38176,6 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            to: {
-                              name: "courses.edit",
-                              params: { id: course.id }
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Edit\n                        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
                         "button",
                         {
                           staticClass: "btn btn-danger",
@@ -38560,6 +38671,268 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card card-default" }, [
+    _c("div", { staticClass: "card-header" }, [_vm._v("Edit enrolment")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              return _vm.updateEnrolment()
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c("label", [_vm._v("Student")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.enrolment.student_id,
+                      expression: "enrolment.student_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.enrolment,
+                        "student_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.students, function(student) {
+                  return _c("option", { domProps: { value: student.id } }, [
+                    _vm._v(_vm._s(student.name))
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm.errors.name
+                ? _c("p", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.student_id[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c("label", [_vm._v("Course")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.enrolment.course_id,
+                      expression: "enrolment.course_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.enrolment,
+                        "course_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.courses, function(course) {
+                  return _c("option", { domProps: { value: course.id } }, [
+                    _vm._v(_vm._s(course.title))
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm.errors.course_id
+                ? _c("p", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.course_id[0]))
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c("label", [_vm._v("Date")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.enrolment.date,
+                    expression: "enrolment.date"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date" },
+                domProps: { value: _vm.enrolment.date },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.enrolment, "date", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.date
+                ? _c("p", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.date[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c("label", [_vm._v("Time")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.enrolment.time,
+                    expression: "enrolment.time"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.enrolment.time },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.enrolment, "time", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.time
+                ? _c("p", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.time[0]))
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c("label", [_vm._v("Status")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.enrolment.status,
+                    expression: "enrolment.status"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.enrolment.status },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.enrolment, "status", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.status
+                ? _c("p", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.status[0]))
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-12 form-group" },
+              [
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _vm._v("Update")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { to: { name: "enrolments" } }
+                  },
+                  [_vm._v("Cancel")]
+                )
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/enrolments/EnrolmentsIndex.vue?vue&type=template&id=54c2dfac&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/user/enrolments/EnrolmentsIndex.vue?vue&type=template&id=54c2dfac& ***!
@@ -38944,24 +39317,6 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                            View\n                        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            to: {
-                              name: "students.edit",
-                              params: { id: student.id }
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                            Edit\n                        "
                           )
                         ]
                       ),
@@ -54084,8 +54439,8 @@ var routes = [{
     component: _components_user_enrolments_EnrolmentsCreate_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   }, {
     path: 'enrolments/:id/edit',
-    component: _components_user_enrolments_EnrolmentsEdit_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    name: 'enrolments.show'
+    name: 'enrolments.edit',
+    component: _components_user_enrolments_EnrolmentsEdit_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
   }]
 }];
 /**
@@ -54516,17 +54871,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _EnrolmentsEdit_vue_vue_type_template_id_a3eec3c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0& */ "./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0&");
+/* harmony import */ var _EnrolmentsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EnrolmentsEdit.vue?vue&type=script&lang=js& */ "./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EnrolmentsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EnrolmentsEdit_vue_vue_type_template_id_a3eec3c0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EnrolmentsEdit_vue_vue_type_template_id_a3eec3c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -54534,8 +54892,42 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/components/user/enrolments/EnrolmentsEdit.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrolmentsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EnrolmentsEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrolmentsEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrolmentsEdit_vue_vue_type_template_id_a3eec3c0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/user/enrolments/EnrolmentsEdit.vue?vue&type=template&id=a3eec3c0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrolmentsEdit_vue_vue_type_template_id_a3eec3c0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EnrolmentsEdit_vue_vue_type_template_id_a3eec3c0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -54833,8 +55225,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\n00160467\Desktop\college\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\n00160467\Desktop\college\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\n00160467\Desktop\WAF_CA2\WAF_CA2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\n00160467\Desktop\WAF_CA2\WAF_CA2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

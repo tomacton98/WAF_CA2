@@ -24,9 +24,6 @@
                             <router-link :to="{ name: 'students.show', params: { id: student.id } }" class="btn btn-info">
                                 View
                             </router-link>
-                            <router-link :to="{ name: 'students.edit', params: { id: student.id } }" class="btn btn-warning">
-                                Edit
-                            </router-link>
                             <button v-on:click="deleteStudent(student.id)" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>

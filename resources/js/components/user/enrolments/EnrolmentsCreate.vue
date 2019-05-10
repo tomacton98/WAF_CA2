@@ -77,11 +77,11 @@
         data: function () {
             return {
                 enrolment: {
-                    name: '',
-                    address: '',
-                    email: '',
-                    phone: '',
-                    start: '',
+                  date: '',
+                  time: '',
+                  status: '',
+                  course_id: '',
+                  student_id: '',
                 },
                 errors: {},
                 courses: [],

@@ -88,8 +88,8 @@ const routes = [
           },
           {
               path: 'enrolments/:id/edit',
-              component: EditEnrolment,
-              name: 'enrolments.show',
+              name: 'enrolments.edit',
+              component: EditEnrolment
           },
         ]
       },
